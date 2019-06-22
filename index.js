@@ -62,6 +62,25 @@ io.on("connection", function(socket){
 		io.emit("changeposition", people);
 	});
 	
+	socket.on("score", function(psn){
+		try {
+			if(psn.name === people[0].name){
+				people[0] = psn;
+			}
+		} catch {}
+		
+		try {
+			if(psn.name === people[1].name){
+				people[1] = psn;
+			}
+		} catch {}
+		
+		io.emit("score", people);
+	});
+	
+	/*This is the collision function I was using but I don't want to use it
+	anymore because I'm doing the jumping game instead.
+	
 	socket.on("collision", function(){
 		console.log("In collision function");
 		try {
@@ -73,7 +92,7 @@ io.on("connection", function(socket){
 				io.emit("collision", ppl);
 			}
 		} catch { console.log("Two people are not signed in."); }
-	});
+	});*/
 });
 
 http.listen(3000, function(){

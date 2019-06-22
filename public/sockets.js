@@ -27,7 +27,7 @@ function pageReady(){
 	
 	canvas = {
 		width:1000,
-		height:400
+		height:400,
 	}
 	
 	//Person is a simple Javascript object that we'll
@@ -147,6 +147,8 @@ function pageReady(){
 			person.jumping = true;
 			person.ySpeed = -15;
 			person.y += person.ySpeed;
+			person.score += 1;
+			socket.emit("score", person);
 		}
 		
 		//If up is NOT pressed
@@ -190,10 +192,7 @@ function pageReady(){
 		"Signed in: " + person.signedin +
 		"<br>Name: " + person.name +
 		"<br>Jumping: " + person.jumping +
-		"<br>Left: " + person.left +
-		"<br>Right: " + person.right +
-		"<br>Bottom: " + person.bottom +
-		"<br>Top: " + person.topp +
+		"<br>Your score: " + person.score +
 		"<br>Y: " + person.y +
 		"<br>X speed: " + person.xSpeed +
 		"<br>Y speed: " + person.ySpeed +
@@ -297,6 +296,7 @@ function pageReady(){
 				person.signedin = true;
 				document.getElementById("login-form__txt").value = "";
 				person.name = name;
+				document.getElementById("login-form__header").innerHTML = "Welcome " + person.name;
 				socket.emit("login", person);
 			}
 		}
@@ -305,6 +305,7 @@ function pageReady(){
 	//Signout function/listener
 	document.getElementById("login-form__logout").addEventListener("click", function(){
 		name = person.name;
+		document.getElementById("login-form__header").innerHTML = "Please enter your name:";
 		
 		if( (name !== "") && (name !== null) ){
 			socket.emit("logout", person);
@@ -333,7 +334,7 @@ function pageReady(){
 		
 		for(var i = 0; i < ppl.length; i++){
 			document.getElementById("player-list__players").innerHTML +=
-			"<div>" + ppl[i].name + " x: " + ppl[i].x + " y: " + ppl[i].y + "</div>";
+			"<div>" + ppl[i].name + ": " + ppl[i].score + " points";
 		}
 	});
 	
@@ -354,14 +355,24 @@ function pageReady(){
 		person.name = "anonymous";
 	});
 	
-	socket.on("collision", function(ppl){
+	socket.on("score", function(ppl){
 		
+		document.getElementById("player-list__players").innerHTML = "";
+		
+		for(var i = 0; i < ppl.length; i++){
+			document.getElementById("player-list__players").innerHTML +=
+				"<div>" + ppl[i].name + ": " + ppl[i].score + " points";
+		}
+	});
+	
+	/*This is the collision function I was working on but I don't want to use it anymore...
+	
+	socket.on("collision", function(ppl){
 		alert("In collision function");
 		people = ppl;
-		
 		document.getElementById("score__p1").innerHTML =
 			ppl[0].name + ": " + ppl[0].score;
 		document.getElementById("score__p2").innerHTML =
 			ppl[1].name + ": " + ppl[1].score;
-	});
+	});*/
 }
