@@ -185,7 +185,7 @@ function pageReady(){
 		person.topp = person.y - person.height;
 		
 		//Write debugging text every frame
-		
+		/*
 		document.getElementById("debug").innerHTML =
 		"Signed in: " + person.signedin +
 		"<br>Name: " + person.name +
@@ -206,7 +206,7 @@ function pageReady(){
 		"<br>person2 right: " + person2.right +
 		"<br>person2 bottom: " + person2.bottom +
 		"<br>person2 top: " + person2.topp;
-		
+		*/
 		//Emit the person object every frame
 		if(person.signedin === true){
 			socket.emit("changeposition", person);
