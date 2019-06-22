@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Sockets game</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="sockets.css">
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			var socket = io();
+		</script>
+		<script type="text/javascript" src="sockets.js"></script>
+	</head>
+	<body>
+		<header class="header" id="header">
+			<img id="header__logo" src="images/AlexLogo_may7.jpg" alt="Alex Legard" width="200" height="100">
+			<ul id="header__menu">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+		</header>
+		
+		<main class="main" id="main">
+			
+			<div id="game-area">
+				<div id="canvas">
+					<div id="person1"></div>
+					<div id="person2"></div>
+				</div>
+		
+				<div id="errmessage"></div>
+				<div id="debug"></div>
+				<div id="people-debug"></div>
+				<div id="collision-debug"></div>
+				<div id="score">
+					<p>Score:</p>
+					<div id="score__p1"></div>
+					<div id="score__p2"></div>
+				</div>
+			</div>
+			
+			
+			
+			<section id="login-form">
+				<p>Please enter your name:</p>
+				<input type="text" id="login-form__txt" autocomplete="off">
+				<button id="login-form__btn">Sign In</button>
+				<button id="login-form__logout">Log Out</button>
+			</section>
+			
+			<div id="player-list">
+				<p id="player-list__heading">Player list:</p>
+				<div id="player-list__players">
+			</div>
+			
+			
+		</main>
+		
+		<footer class="footer" id="footer">
+			&copy; Alex Legard, 2019.
+		</footer>
+	</body>
+</html>

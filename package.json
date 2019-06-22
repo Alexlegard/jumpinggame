@@ -1,0 +1,9 @@
+{
+  "name": "sockets-game",
+  "version": "0.0.1",
+  "description": "Socket game jumping on each other's heads",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^2.2.0"
+  }
+}
